@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
-import { HiOutlineHome, HiUserGroup } from "react-icons/hi2";
+import { HiOutlineHome, HiUserGroup, HiEnvelopeOpen  } from "react-icons/hi2";
 import { HiOutlineCalendarDays } from "react-icons/hi2";
 import { HiOutlineUsers } from "react-icons/hi2";
 import useUser from "../features/authentication/useUser";
@@ -77,14 +77,36 @@ const navAdminList = [
         icon: <HiOutlineUsers />,
     },
 ];
-const navStudentList = [];
-const navTeacherList = [];
+
+const navTeacherList = [
+    {
+        title: "Home",
+        route: "dashboard",
+        icon: <HiOutlineHome />,
+    },
+    {
+        title: "Schedule",
+        route: "teacher/schedule",
+        icon: <HiOutlineCalendarDays />,
+    },
+    {
+        title: "Messages",
+        route: "teaher/messages",
+        icon: <HiEnvelopeOpen />,
+    },
+    {
+        title: "Profile",
+        route: "teacher/profile",
+        icon: <HiOutlineUsers />,
+    },
+];
 
 function MainNav() {
     const { user } = useUser();
 
     let navList;
-    if (user.user?.role === "admin") navList = navAdminList;
+ if (user.user?.role === "admin") navList = navAdminList;
+ if (user.user?.role === "teacher") navList = navTeacherList;
     return (
         <nav>
             <NavList>
